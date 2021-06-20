@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # TODO list
 # 1. fix the python-docker API run command (need to ask Rob)
+# 2. implement serial port change function
 # 2. figure out how to improve timing without using wait()
 
 
@@ -32,35 +33,6 @@ def print_menu():
     print(67 * "-") 
 
 
-# loop for menu
-def menu_loop():
-    while True:          
-        print_menu()    
-        choice = input("please select from the above menu [1-" + str(len(menuStrings)) + "]: ")
-        choice = int(choice) 
-        if choice == 1:     
-            print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-")  
-            start_ventmon() 
-        elif choice == 2:
-            print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-")  
-            ## You can add your code or functions here
-        elif choice == 3:
-            print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-")  
-            print("Menu 3 has been selected")
-            ## You can add your code or functions here
-        elif choice == 4:
-            print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-")  
-            print("Menu 3 has been selected")
-            ## You can add your code or functions here
-        elif choice == 5:
-            print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-")  
-            ## You can add your code or functions here
-            break;
-        else:
-            # Any integer inputs other than values 1-5 we print an error message
-            input("EROR: please enter a number between 1 and " + str(len(menuStrings)) + "\n")
-
-
 # kick off ventmon process
 def start_ventmon():
     if check_serial() == True:
@@ -70,6 +42,52 @@ def start_ventmon():
     else:
         print("ERROR: no VentMon connected")
   
+
+# stop local VentMon
+def stop_ventmon():
+  os.system("cd ~")
+  os.system("pkill -9 node")
+  os.system("docker stop logger")
+
+
+# change the device file desciptor
+def change_serial_info():
+
+  print("function to change serial info")
+
+
+# check for updates on git
+def check_for_updates():
+
+  print("function to check for repo updates")
+
+
+# exit the menu loop
+def exit_menu():
+  print("exiting local VentMon menu")
+  exit()
+
+
+# handle menu input from user
+def get_menu_choice():
+    while True:    
+        try:
+            number = int(input("please select from the above menu [1-" + str(len(menuStrings)) + "]: "))
+            if 1 <= number <= len(menuStrings):
+                return number
+        except (ValueError, TypeError):
+            pass
+
+  
+# loop for menu
+def menu_loop():
+    menuFunctions = (start_ventmon, stop_ventmon, change_serial_info, check_for_updates, exit_menu)
+    while True:          
+        print_menu()   
+        choice = get_menu_choice() 
+        print("\n", 5 * "-", menuStrings[choice - 1], 5 * "-") 
+        menuFunctions[choice - 1]() 
+
 
 # check whether ventmont is active on expected serial port
 def check_serial():
@@ -137,7 +155,6 @@ def start_javascript():
 def start_browser():
     os.system("chromium-browser --kiosk http://localhost:8081 &")
     time.sleep(10)
-
 
 
 # main

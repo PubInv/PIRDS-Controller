@@ -69,14 +69,12 @@ SETUP
 START
 
 5. start the docker image
-> cd ~/VentMon/PIRDS-docker-local
-> docker build --tag pirds-logger .
+> docker build --tag pirds-logger ~/VentMon/PIRDS-docker-local
 > docker run -d --rm --name logger -p 8081:80 -p 6111:6111/udp -v `pwd`/logger_src/data:/data pirds-logger
  
 
 6. start vent-display
-> cd ~/VentMon/vent-display
-> node serialserver.js --uaddress=127.0.0.1 --sport=/dev/ttyUSB0 --uport=6111 &
+> node ~/VentMon/vent-display/serialserver.js --uaddress=127.0.0.1 --sport=/dev/ttyUSB0 --uport=6111 &
 
 
 7. go to local breath plot
@@ -89,5 +87,6 @@ START
 STOP
 
 8. stop the whole thing
-> kill -9 $(pidof node)
+> cd ~
+> pkill -9 node
 > docker stop logger
