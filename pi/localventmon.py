@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# TODO list
+# 1. fix the python-docker API run command (need to ask Rob)
+# 2. figure out how to improve timing without using wait()
+
 
 import os
 import signal
@@ -26,6 +30,7 @@ def print_menu():
     print("4. " , menuStrings[3])
     print("5. " , menuStrings[4])
     print(67 * "-") 
+
 
 # loop for menu
 def menu_loop():
@@ -64,7 +69,7 @@ def start_ventmon():
         start_browser()
     else:
         print("ERROR: no VentMon connected")
-
+  
 
 # check whether ventmont is active on expected serial port
 def check_serial():
@@ -88,7 +93,8 @@ def start_docker():
     if len(dockerClient.containers.list()) == 0:
         print("starting docker image...")
         dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local", tag="pirds-logger")
-        dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding) 
+        os.system("docker run -d --rm --name logger -p 8081:80 -p 6111:6111/udp -v `pwd`/logger_src/data:/data pirds-logger")
+        # dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding) 
     else:
         # get the container with the logger image and check whether it's running
         container = dockerClient.containers.get('logger')
@@ -100,7 +106,8 @@ def start_docker():
             print("re-starting docker image...")
             container.stop()
             dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local/", tag="pirds-logger")
-            dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding)  
+            os.system("docker run -d --rm --name logger -p 8081:80 -p 6111:6111/udp -v `pwd`/logger_src/data:/data pirds-logger")
+            # dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding)  
 
 
 # start vent display js
@@ -123,14 +130,14 @@ def start_javascript():
     pidOutput = subprocess.run(["pidof", "node"], capture_output=True, text=True).stdout
     print("pid of node process: " + pidOutput.strip('\n'))
 
-    time.sleep(15)
-
+    time.sleep(10)
 
 
 # open browser 
 def start_browser():
-    os.system("chromium-browser http://localhost:8081 &")
+    os.system("chromium-browser --kiosk http://localhost:8081 &")
     time.sleep(10)
+
 
 
 # main

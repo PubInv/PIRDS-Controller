@@ -89,7 +89,5 @@ START
 STOP
 
 8. stop the whole thing
-> pidof node
-## get the pid of the .js
-> kill -9 <pid>
+> kill -9 $(pidof node)
 > docker stop logger
