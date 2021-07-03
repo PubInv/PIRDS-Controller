@@ -125,7 +125,7 @@ def install_ventmon():
   os.system("sudo apt-get update")
   os.system("sudo apt-get upgrade")
   # check for git
-  if shutil.which("git") == False:
+  if shutil.which("git") == None:
     os.system("sudo apt-get install git")
 
   # setup repos
@@ -163,7 +163,7 @@ def install_ventmon():
     os.system("git pull origin main")
   
   # install docker
-  if shutil.which("docker") == '':
+  if shutil.which("docker") == None:
    os.system("curl -fsSL https://get.docker.com -o get-docker.sh")
    os.system("sudo sh get-docker.sh")
    os.system("sudo dpkg --configure -a")
@@ -182,10 +182,11 @@ def install_ventmon():
    print("libseccomp is ready to go")
 
   # javascript
-  if shutil.which("node") == '':
+  if shutil.which("node") == None:
     os.chdir(vent_home)
     os.system("curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -")
     os.system("sudo apt-get install -y nodejs")
+    os.system("sudo apt-get install npm")
   else:
     print("node is already installed")
     
