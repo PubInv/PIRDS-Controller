@@ -177,7 +177,7 @@ def install_ventmon():
     url = "http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb"
     r = requests.get(url, allow_redirects=True)
     os.system("cd ~/Downloads/")
-    os.system("sudo dpkg -i libseccomp2_2.x.x-1+b1_armhf.deb")
+    os.system("sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb")
   else:
    print("libseccomp is ready to go")
 
