@@ -40,14 +40,13 @@ VentMon T0.4
 > sudo apt-get install python3.7
 > pip3 install docker 
 > pip3 install pyserial 
-> pip3 install requests 
 
 9. reboot the device 
 > sudo reboot
  
 10. localventmon.py should start automatically and present you with a menu
 
-11. choose the install step and follow along with prompts (agree to all installs, reboot will be required)
+11. choose the install step and follow along with prompts (after reboot choose the installation option for a second time)
 
 12. once install is complete, choose menu option to configure VentMon's serial port
 

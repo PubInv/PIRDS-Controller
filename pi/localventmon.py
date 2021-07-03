@@ -12,7 +12,6 @@ import time
 import re
 import os.path 
 import shutil
-import requests
 from difflib import Differ 
 
 # installation paths
