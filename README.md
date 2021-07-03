@@ -1,7 +1,7 @@
 # PIRDS-Controller
 A hardware device for viewing PIRDS data, with some Raspi Software.
 
-For Python application install see [install_instructions.txt](https://github.com/PubInv/PIRDS-Controller/pi/install_instructions.txt)
+For Python application install see [install_instructions.txt](https://github.com/PubInv/PIRDS-Controller/blob/main/pi/install_instructions.txt)
 
 
 ## Basic Idea
