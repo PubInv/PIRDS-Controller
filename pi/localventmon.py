@@ -125,33 +125,36 @@ def install_ventmon():
   os.system("sudo apt-get update")
   os.system("sudo apt-get upgrade")
   # check for git
-  if shutil.which("git") == 'False':
+  if shutil.which("git") == False:
     os.system("sudo apt-get install git")
 
   # setup repos
-  if os.path.isdir(vent_home) == 'False': 
+  if os.path.isdir(vent_home) == False: 
     os.mkdir(vent_home)
     os.chdir(vent_home)
   else:
     print(vent_home, " already exists")
+
   # vent-display
-  if os.path.isdir(vent_display) == 'False\n':
+  if os.path.isdir(vent_display) == False:
     os.chdir(vent_home)
     os.system("git clone https://github.com/PubInv/vent-display.git")
   else:
     print(vent_display, "already exists, updating repo...")
     os.chdir(vent_display)
     os.system("git pull origin master")
+
   # PIRDS-Controller
-  if os.path.isdir(pirds_controller) == 'False':
+  if os.path.isdir(pirds_controller) == False:
     os.chdir(vent_home)
     os.system("git clone https://github.com/PubInv/PIRDS-Controller.git")
   else:
     print(pirds_controller, "already exists, updating repo...")
     os.chdir(pirds_controller)
     os.system("git pull origin main")
+
   # PIRDS-docker-local
-  if os.path.isdir(pirds_docker) == 'False':
+  if os.path.isdir(pirds_docker) == False:
     os.chdir(vent_home)
     os.system("git clone https://github.com/PubInv/PIRDS-docker-local.git")
   else:
@@ -170,7 +173,7 @@ def install_ventmon():
    print("docker is already installed")
 
   # download new libseccomp2
-  if os.path.exists("/home/pi/Downloads/libseccomp2_2.5.1-1_armhf.deb") == 'False':
+  if os.path.exists("/home/pi/Downloads/libseccomp2_2.5.1-1_armhf.deb") == False:
     url = "http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb"
     r = requests.get(url, allow_redirects=True)
     os.system("cd ~/Downloads/")
