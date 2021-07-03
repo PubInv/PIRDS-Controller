@@ -1,0 +1,5 @@
+[Desktop Entry]
+# Exec=chromium-browser https://theparisreview.org
+Name=localventmon
+Exec=lxterminal -e bash -c '/usr/bin/python3 /home/pi/VentMon/PIRDS-Controller/pi/localventmon.py;$SHELL'
+Terminal=true
