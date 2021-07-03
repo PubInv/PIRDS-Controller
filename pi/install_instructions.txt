@@ -1,4 +1,4 @@
-LOCAL VENTMON PRE-INSTALLATION STEPS
+VENTMON LOCAL PRE-INSTALLATION STEPS
 ====================================
 
 Keep these instructions handy on a standard computer while running installation steps on the RaspberryPi.
@@ -31,26 +31,25 @@ VentMon T0.4
 6. open the terminal and clone the PIRDS-Controller git repository
 > git clone https://github.com/PubInv/PIRDS-Controller.git
 
-8. create autostart directory and move localventmon.desktop there
+7. create autostart directory and move localventmon.desktop there
 > mkdir /home/pi/.config/autostart
 > cp /home/pi/VentMon/PIRDS-Controller/pi/localventmon.desktop /home/pi/.config/autostart
 
-9. make sure python3 and pip are installed
+8. make sure python3 and pip are installed
 > cd /home/pi
 > sudo apt-get install python3.7
-> sudo apt-get install python3-pip
 > pip3 install docker 
-> pip3 install serial 
+> pip3 install pyserial 
 > pip3 install requests 
 
-10. reboot the device 
+9. reboot the device 
 > sudo reboot
  
-11. localventmon.py should start automatically and present you with a menu
+10. localventmon.py should start automatically and present you with a menu
 
-12. choose the install step and follow along with prompts (agree to all installs, reboot will be required)
+11. choose the install step and follow along with prompts (agree to all installs, reboot will be required)
 
-13. once install is complete, choose menu option to configure VentMon's serial port
+12. once install is complete, choose menu option to configure VentMon's serial port
 
-14. choose menu option to start the program
+13. choose menu option to start the program
 
