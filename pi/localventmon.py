@@ -135,7 +135,7 @@ def install_ventmon():
   else:
     print(vent_home, " already exists")
   # vent-display
-  if os.path.isdir(vent_display) == 'False':
+  if os.path.isdir(vent_display) == 'False\n':
     os.chdir(vent_home)
     os.system("git clone https://github.com/PubInv/vent-display.git")
   else:
