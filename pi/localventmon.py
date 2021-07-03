@@ -271,7 +271,8 @@ def start_docker():
     # check to see if we have any containers running (only expect one to be running)
     if len(dockerClient.containers.list()) == 0:
         print("starting docker image...")
-        dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local", tag="pirds-logger")
+        # dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local", tag="pirds-logger")
+        os.system("docker build --tag pirds-logger /home/pi/VentMon/PIRDS-docker-local")
         os.system("docker run -d --rm --name logger -p 8081:80 -p 6111:6111/udp -v /home/pi/VentMon/PIRDS-docker-local/logger_src/data:/data pirds-logger")
         # dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding) 
     else:
@@ -284,7 +285,8 @@ def start_docker():
             # if the contaier has been run, but is not currently running stop and re-start it
             print("re-starting docker image...")
             container.stop()
-            dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local/", tag="pirds-logger")
+            # dockerClient.images.build(path="/home/pi/VentMon/PIRDS-docker-local/", tag="pirds-logger")
+            os.system("docker build --tag pirds-logger /home/pi/VentMon/PIRDS-docker-local")
             os.system("docker run -d --rm --name logger -p 8081:80 -p 6111:6111/udp -v `/home/pi/VentMon/PIRDS-docker-local/logger_src/data:/data pirds-logger")
             # dockerClient.containers.run(name='logger', image='pirds-logger', detach='True', remove='True', ports=port_bindings, volumes=volume_binding)  
 
