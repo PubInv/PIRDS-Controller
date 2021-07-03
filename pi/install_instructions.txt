@@ -1,11 +1,22 @@
-PRE-INSTALLATION STEPS
+LOCAL VENTMON PRE-INSTALLATION STEPS
+====================================
 
-1. istall Raspbian on SD card for Pi
-   follow the steps here:  https://www.raspberrypi.org/software/
+Keep these instructions handy on a standard computer while running installation steps on the RaspberryPi.
 
-2. boot Pi and setup wifi connection
+questions: 
+lauria.clarke@gmail.com
 
-3. upgrade / update OS
+tested HW:
+RaspberryPi 3 Model B+
+VentMon T0.4
+
+-------------------------------------
+
+1. istall Raspbian on SD card for Pi by following the steps here:  https://www.raspberrypi.org/software/
+
+2. boot Pi and follow setup steps (be sure to setup wifi connection)
+
+3. open terminal and upgrade / update OS
 > sudo apt-get update
 > sudo apt-get upgrade
 
@@ -20,12 +31,12 @@ PRE-INSTALLATION STEPS
 6. open the terminal and clone the PIRDS-Controller git repository
 > git clone https://github.com/PubInv/PIRDS-Controller.git
 
-8. move localventmon.desktop to autostart
-> mv /home/pi/VentMon/PIRDS-Controller/pi/localventmon.desktop /home/pi/.config/autostart
+8. create autostart directory and move localventmon.desktop there
+> mkdir /home/pi/.config/autostart
+> cp /home/pi/VentMon/PIRDS-Controller/pi/localventmon.desktop /home/pi/.config/autostart
 
 9. make sure python3 and pip are installed
 > cd /home/pi
-> sudo apt-get update
 > sudo apt-get install python3.7
 > sudo apt-get install python3-pip
 > pip3 install docker 
@@ -35,7 +46,11 @@ PRE-INSTALLATION STEPS
 10. reboot the device 
 > sudo reboot
  
-11. localventmon.py should start automatically and present you with a menu, choose the install step
+11. localventmon.py should start automatically and present you with a menu
 
-12. once install is complete, start the program
+12. choose the install step and follow along with prompts (agree to all installs, reboot will be required)
+
+13. once install is complete, choose menu option to configure VentMon's serial port
+
+14. choose menu option to start the program
 
