@@ -302,7 +302,11 @@ def start_javascript():
       print("killing existing node process")
       os.kill(int(pidOutput), signal.SIGTERM)
       print("restarting node process")
-    
+   
+    # remove this guy
+    if os.path.isdir("/home/pi/VentMon/vent-display/node_modules/@serialport") == True: 
+      os.system("rm -rf /home/pi/VentMon/vent-display/node_modules/@serialport")
+
     # start the javascript
     os.system("node /home/pi/VentMon/vent-display/serialserver.js --uaddress=127.0.0.1 --sport=" + serialFd + " --uport=6111 &")
     os.chdir("/home/pi/VentMon/")
@@ -315,7 +319,8 @@ def start_javascript():
 
 # open browser 
 def start_browser():
-    os.system("chromium-browser --kiosk http://localhost:8081 &")
+    # os.system("chromium-browser --kiosk http://localhost:8081 &")
+    os.system("chromium-browser http://localhost:8081 &")
     time.sleep(10)
 
 
